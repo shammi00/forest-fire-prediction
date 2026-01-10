@@ -66,6 +66,9 @@ forest/
 ├── notebook/             # Jupyter notebooks
 │   ├── model traning.ipynb
 │   └── ridge lasso elasticnet.ipynb
+├── dataset/              # Dataset files
+│   ├── algerian_forest_fires_cleaned.csv
+│   └── Algerian_forest_fires_dataset_UPDATE.csv
 ├── requirements.txt      # Project dependencies
 └── README.md             # Project documentation
 ```
