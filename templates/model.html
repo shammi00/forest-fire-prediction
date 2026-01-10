@@ -1,0 +1,63 @@
+<html>
+<body>
+  <div class="login">
+    <h1>FWI Prediction</h1>
+
+    <form action="{{ url_for('model') }}" method="post">
+
+      <label>Temperature (°C)</label><br>
+      <input type="range" name="Temperature" min="22" max="42" step="0.1" value="30"
+             oninput="this.nextElementSibling.value = this.value">
+      <output>30</output><br><br>
+
+      <label>Relative Humidity (%)</label><br>
+      <input type="range" name="RH" min="20" max="90" step="1" value="50"
+             oninput="this.nextElementSibling.value = this.value">
+      <output>50</output><br><br>
+
+      <label>Wind Speed (km/h)</label><br>
+      <input type="range" name="Ws" min="6" max="29" step="1" value="10"
+             oninput="this.nextElementSibling.value = this.value">
+      <output>10</output><br><br>
+
+      <label>Rain (mm)</label><br>
+      <input type="range" name="Rain" min="0" max="16" step="0.1" value="0"
+             oninput="this.nextElementSibling.value = this.value">
+      <output>0</output><br><br>
+
+      <label>FFMC</label><br>
+      <input type="range" name="FFMC" min="28" max="96" step="0.1" value="85"
+             oninput="this.nextElementSibling.value = this.value">
+      <output>85</output><br><br>
+
+      <label>DMC</label><br>
+      <input type="range" name="DMC" min="1" max="300" step="1" value="100"
+             oninput="this.nextElementSibling.value = this.value">
+      <output>100</output><br><br>
+
+      <label>ISI</label><br>
+      <input type="range" name="ISI" min="0" max="56" step="0.1" value="5"
+             oninput="this.nextElementSibling.value = this.value">
+      <output>5</output><br><br>
+
+      <label>Fire Class</label><br>
+      <select name="Classes" required>
+        <option value="0">No Fire</option>
+        <option value="1">Fire</option>
+      </select><br><br>
+
+      <label>Region</label><br>
+      <select name="Region" required>
+        <option value="1">Bejaia Region</option>
+        <option value="2">Sidi Bel-Abbes Region</option>
+      </select><br><br>
+
+      <button type="submit">Predict</button>
+    </form>
+
+    <h2>
+      THE FWI prediction is {{prediction }}
+    </h2>
+  </div>
+</body>
+</html>

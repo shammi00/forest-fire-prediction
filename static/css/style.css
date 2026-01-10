@@ -1,0 +1,54 @@
+.project-intro {
+  background: #f7f9fc;
+  padding: 20px 25px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: Arial, sans-serif;
+}
+
+.project-intro h2 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+.project-intro h4 {
+  margin-top: 20px;
+  color: #34495e;
+}
+
+.project-intro p {
+  color: #555;
+  line-height: 1.6;
+}
+
+.project-intro ul {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.project-intro ul li {
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.project-intro .note {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: #eef3ff;
+  border-left: 4px solid #4a6cf7;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+.notebook-link {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.notebook-link:hover {
+  text-decoration: underline;
+}
+

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forest Fire Prediction</title>
+
+    <link rel="stylesheet" 
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+
+<div class="project-intro">
+  <h2>🔥 Forest Fire Prediction Project</h2>
+
+  <p>
+    This project predicts the possibility of forest fires using machine learning.
+    All <strong>data cleaning</strong>, <strong>feature engineering</strong>, and
+    <strong>model training</strong> were performed using
+    <strong>Jupyter Notebooks</strong>.
+  </p>
+
+  <p>
+    The notebooks document the complete workflow used to build the model.
+  </p>
+
+  <h4>📘 Notebooks Overview</h4>
+  <ul>
+    <li>
+      <a href="https://github.com/krishnaik06/forestfire/blob/main/EDA%20And%20Feature%20Engineering.ipynb"
+         target="_blank"
+         class="notebook-link">
+        EDA And Feature Engineering.ipynb
+      </a>
+      – Data cleaning, EDA, and feature engineering
+    </li>
+
+    <li>
+      <a href="https://github.com/krishnaik06/forestfire/blob/main/Model%20Training.ipynb"
+         target="_blank"
+         class="notebook-link">
+        Model Training.ipynb
+      </a>
+      – Model training, evaluation, and saving the final model
+    </li>
+  </ul>
+
+  <p class="note">
+    This Flask web application is used only for real-time prediction
+    using the trained model and scaler.
+  </p>
+</div>
+
+</body>
+</html>
