@@ -47,3 +47,25 @@ The goal is to estimate forest fire risk based on environmental conditions.
 3. Install dependencies:
    ```bash
    pip install -r requirements.txt
+
+
+## 📂 Project Structure
+
+```text
+forest/
+├── application.py        # Flask application entry point
+├── templates/            # HTML templates
+│   ├── home.html
+│   └── model.html
+├── static/               # Static files (CSS, JS)
+│   └── css/
+│       └── style.css
+├── model/                # Saved ML models
+│   ├── ridge.pkl
+│   └── scaler.pkl
+├── notebook/             # Jupyter notebooks
+│   ├── model traning.ipynb
+│   └── ridge lasso elasticnet.ipynb
+├── requirements.txt      # Project dependencies
+└── README.md             # Project documentation
+```
