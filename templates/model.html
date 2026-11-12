@@ -1,63 +1,335 @@
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FWI Prediction | Forest Fire ML</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7f5;
+            color: #243b32;
+        }
+
+        .navbar {
+            background: #176b42;
+            padding: 18px 7%;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #66766e;
+            line-height: 1.6;
+        }
+
+        .card {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.06);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .field label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .slider-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            accent-color: #198754;
+            cursor: pointer;
+        }
+
+        output {
+            min-width: 48px;
+            text-align: center;
+            background: #eaf6ef;
+            color: #176b42;
+            padding: 7px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d5e1da;
+            border-radius: 8px;
+            background: white;
+            color: #243b32;
+            font-size: 14px;
+        }
+
+        .predict-btn {
+            width: 100%;
+            margin-top: 30px;
+            padding: 15px;
+            background: #198754;
+            border: none;
+            border-radius: 9px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .predict-btn:hover {
+            background: #146c43;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 25px;
+            border-radius: 12px;
+            background: #eaf6ef;
+            border: 1px solid #b7dfc6;
+            text-align: center;
+        }
+
+        .result h3 {
+            margin: 0 0 12px;
+            color: #176b42;
+        }
+
+        .result .value {
+            font-size: 38px;
+            font-weight: bold;
+            color: #176b42;
+        }
+
+        .result p {
+            font-size: 13px;
+            color: #65766c;
+        }
+
+        .footer {
+            text-align: center;
+            margin: 30px 0;
+            color: #89978e;
+            font-size: 12px;
+        }
+
+        @media (max-width: 650px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
 <body>
-  <div class="login">
-    <h1>FWI Prediction</h1>
 
-    <form action="{{ url_for('model') }}" method="post">
+    <nav class="navbar">
+        <h2>Forest Fire ML</h2>
+        <a href="{{ url_for('home') }}">← Back to Home</a>
+    </nav>
 
-      <label>Temperature (°C)</label><br>
-      <input type="range" name="Temperature" min="22" max="42" step="0.1" value="30"
-             oninput="this.nextElementSibling.value = this.value">
-      <output>30</output><br><br>
+    <div class="container">
 
-      <label>Relative Humidity (%)</label><br>
-      <input type="range" name="RH" min="20" max="90" step="1" value="50"
-             oninput="this.nextElementSibling.value = this.value">
-      <output>50</output><br><br>
+        <div class="header">
+            <h1>Forest Fire Weather Index Prediction</h1>
+            <p>
+                Enter environmental conditions below to estimate
+                the Fire Weather Index (FWI) using Ridge Regression.
+            </p>
+        </div>
 
-      <label>Wind Speed (km/h)</label><br>
-      <input type="range" name="Ws" min="6" max="29" step="1" value="10"
-             oninput="this.nextElementSibling.value = this.value">
-      <output>10</output><br><br>
+        <div class="card">
 
-      <label>Rain (mm)</label><br>
-      <input type="range" name="Rain" min="0" max="16" step="0.1" value="0"
-             oninput="this.nextElementSibling.value = this.value">
-      <output>0</output><br><br>
+            <form action="{{ url_for('model') }}" method="POST">
 
-      <label>FFMC</label><br>
-      <input type="range" name="FFMC" min="28" max="96" step="0.1" value="85"
-             oninput="this.nextElementSibling.value = this.value">
-      <output>85</output><br><br>
+                <div class="form-grid">
 
-      <label>DMC</label><br>
-      <input type="range" name="DMC" min="1" max="300" step="1" value="100"
-             oninput="this.nextElementSibling.value = this.value">
-      <output>100</output><br><br>
+                    <div class="field">
+                        <label for="temperature">Temperature (°C)</label>
+                        <div class="slider-row">
+                            <input id="temperature" type="range"
+                                   name="Temperature"
+                                   min="22" max="42" step="0.1"
+                                   value="30"
+                                   oninput="this.nextElementSibling.value=this.value">
+                            <output>30</output>
+                        </div>
+                    </div>
 
-      <label>ISI</label><br>
-      <input type="range" name="ISI" min="0" max="56" step="0.1" value="5"
-             oninput="this.nextElementSibling.value = this.value">
-      <output>5</output><br><br>
+                    <div class="field">
+                        <label for="rh">Relative Humidity (%)</label>
+                        <div class="slider-row">
+                            <input id="rh" type="range"
+                                   name="RH"
+                                   min="20" max="90" step="1"
+                                   value="50"
+                                   oninput="this.nextElementSibling.value=this.value">
+                            <output>50</output>
+                        </div>
+                    </div>
 
-      <label>Fire Class</label><br>
-      <select name="Classes" required>
-        <option value="0">No Fire</option>
-        <option value="1">Fire</option>
-      </select><br><br>
+                    <div class="field">
+                        <label for="ws">Wind Speed (km/h)</label>
+                        <div class="slider-row">
+                            <input id="ws" type="range"
+                                   name="Ws"
+                                   min="6" max="29" step="1"
+                                   value="10"
+                                   oninput="this.nextElementSibling.value=this.value">
+                            <output>10</output>
+                        </div>
+                    </div>
 
-      <label>Region</label><br>
-      <select name="Region" required>
-        <option value="1">Bejaia Region</option>
-        <option value="2">Sidi Bel-Abbes Region</option>
-      </select><br><br>
+                    <div class="field">
+                        <label for="rain">Rain (mm)</label>
+                        <div class="slider-row">
+                            <input id="rain" type="range"
+                                   name="Rain"
+                                   min="0" max="16" step="0.1"
+                                   value="0"
+                                   oninput="this.nextElementSibling.value=this.value">
+                            <output>0</output>
+                        </div>
+                    </div>
 
-      <button type="submit">Predict</button>
-    </form>
+                    <div class="field">
+                        <label for="ffmc">FFMC</label>
+                        <div class="slider-row">
+                            <input id="ffmc" type="range"
+                                   name="FFMC"
+                                   min="28" max="96" step="0.1"
+                                   value="85"
+                                   oninput="this.nextElementSibling.value=this.value">
+                            <output>85</output>
+                        </div>
+                    </div>
 
-    <h2>
-      THE FWI prediction is {{prediction }}
-    </h2>
-  </div>
+                    <div class="field">
+                        <label for="dmc">DMC</label>
+                        <div class="slider-row">
+                            <input id="dmc" type="range"
+                                   name="DMC"
+                                   min="1" max="300" step="1"
+                                   value="100"
+                                   oninput="this.nextElementSibling.value=this.value">
+                            <output>100</output>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="isi">ISI</label>
+                        <div class="slider-row">
+                            <input id="isi" type="range"
+                                   name="ISI"
+                                   min="0" max="56" step="0.1"
+                                   value="5"
+                                   oninput="this.nextElementSibling.value=this.value">
+                            <output>5</output>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="classes">Fire Class</label>
+                        <select id="classes" name="Classes" required>
+                            <option value="0">No Fire</option>
+                            <option value="1">Fire</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="region">Region</label>
+                        <select id="region" name="Region" required>
+                            <option value="1">Bejaia Region</option>
+                            <option value="2">Sidi Bel-Abbes Region</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <button class="predict-btn" type="submit">
+                    Predict Fire Weather Index
+                </button>
+
+            </form>
+
+            {% if prediction is defined and prediction is not none %}
+            <div class="result">
+                <h3>Predicted Fire Weather Index</h3>
+                <div class="value">
+                    {{ "%.2f"|format(prediction) }}
+                </div>
+                <p>
+                    Estimated FWI based on the environmental
+                    conditions entered above.
+                </p>
+            </div>
+            {% endif %}
+
+        </div>
+
+        <div class="footer">
+            Forest Fire Prediction | Machine Learning with Flask
+        </div>
+
+    </div>
+
 </body>
 </html>
